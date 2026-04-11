@@ -37,6 +37,7 @@ def display_game(wrong_guess):
     for line in hangman_art[wrong_guess]:  # FIXED name
         print(line)
     print("**********************************")
+    print("**********************************")
 
 
 def display_hint(hint):
