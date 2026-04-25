@@ -34,23 +34,22 @@ hangman_art = {
 
 
 def display_game(wrong_guess):
-    for line in hangman_art[wrong_guess]:  # FIXED name
+    for line in hangman_art[wrong_guess]:
         print(line)
-    print("**********************************")
     print("**********************************")
 
 
 def display_hint(hint):
-    print(" ".join(hint))
+    print("Word:", " ".join(hint))
 
 
 def display_answer(answer):
-    print(" ".join(answer))
+    print("Answer:", " ".join(answer))
 
 
 def main():
     answer = random.choice(words)
-    hint = ["_"] * len(answer)   # FIXED variable name
+    hint = ["_"] * len(answer)
     wrong_guess = 0
     guessed_letters = set()
     is_running = True
@@ -59,9 +58,11 @@ def main():
         display_game(wrong_guess)
         display_hint(hint)
 
+        # Small change: show guessed letters
+        print("Guessed letters:", " ".join(sorted(guessed_letters)))
+
         guess = input("Enter a letter: ").lower()
 
-        # validation
         if len(guess) != 1 or not guess.isalpha():
             print("Invalid input")
             continue
@@ -79,14 +80,12 @@ def main():
         else:
             wrong_guess += 1
 
-        # win condition
         if "_" not in hint:
             display_game(wrong_guess)
             display_answer(answer)
             print("🎉 You win!")
             is_running = False
 
-        # lose condition
         elif wrong_guess >= len(hangman_art) - 1:
             display_game(wrong_guess)
             display_answer(answer)
